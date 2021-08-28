@@ -89,12 +89,12 @@ const ImageUploader: FC = () => {
   );
 };
 
-function App() {
+const App = () => {
   return (
     <div className="container">
       <ImageUploader />
     </div>
   );
-}
+};
 
 export default App;
