@@ -1,7 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
-import "./App.css";
 
 type ThumbProps = {
   file: File | null;
