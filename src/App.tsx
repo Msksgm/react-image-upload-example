@@ -57,7 +57,8 @@ const ImageUploader: FC = () => {
       validationSchema={yup.object().shape({
         file: yup.mixed().required(),
       })}
-      render={({ values, handleSubmit, setFieldValue }) => {
+    >
+      {({ handleSubmit, setFieldValue, values }) => {
         return (
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -84,7 +85,7 @@ const ImageUploader: FC = () => {
           </form>
         );
       }}
-    />
+    </Formik>
   );
 };
 
