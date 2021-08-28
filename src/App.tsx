@@ -1,24 +1,97 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, useState, useEffect } from "react";
+import { Formik } from "formik";
+import * as yup from "yup";
+import "./App.css";
+
+type ThumbProps = {
+  file: any;
+};
+
+const Thumb: FC<ThumbProps> = ({ file }) => {
+  const [loading, setLoading] = useState<Boolean>(true);
+  const [thumb, setThumb] = useState<any>();
+
+  useEffect(() => {
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setThumb(reader.result);
+      };
+      setLoading(false);
+    }
+  }, [file]);
+
+  if (!file) {
+    return null;
+  }
+
+  if (loading) {
+    return <p>Loading....</p>;
+  }
+
+  return (
+    <img
+      src={thumb}
+      alt={file.name}
+      className="img-thumbnail mt-2"
+      height={200}
+      width={200}
+    />
+  );
+};
+
+const ImageUploader: FC = () => {
+  return (
+    <Formik
+      initialValues={{ file: null }}
+      onSubmit={(values: any) => {
+        alert(
+          JSON.stringify({
+            fileName: values.file.name,
+            type: values.file.type,
+            size: `${values.file.size} bytes`,
+          })
+        );
+      }}
+      validationSchema={yup.object().shape({
+        file: yup.mixed().required(),
+      })}
+      render={({ values, handleSubmit, setFieldValue }) => {
+        return (
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="file">File upload</label>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                onChange={(event) => {
+                  setFieldValue(
+                    "file",
+                    event.currentTarget.files !== null
+                      ? event.currentTarget.files[0]
+                      : null
+                  );
+                }}
+                className="form-control"
+              />
+              <Thumb file={values.file} />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              submit
+            </button>
+          </form>
+        );
+      }}
+    />
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <ImageUploader />
     </div>
   );
 }
