@@ -4,19 +4,19 @@ import * as yup from "yup";
 import "./App.css";
 
 type ThumbProps = {
-  file: any;
+  file: File | null;
 };
 
 const Thumb: FC<ThumbProps> = ({ file }) => {
   const [loading, setLoading] = useState<Boolean>(true);
-  const [thumb, setThumb] = useState<any>();
+  const [thumb, setThumb] = useState<string>();
 
   useEffect(() => {
     const reader = new FileReader();
     if (file) {
       reader.readAsDataURL(file);
       reader.onload = () => {
-        setThumb(reader.result);
+        setThumb(reader.result as string);
       };
       setLoading(false);
     }
