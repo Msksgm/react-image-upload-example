@@ -88,7 +88,7 @@ const ImageUploader: FC = () => {
   );
 };
 
-const App = () => {
+const App: FC = () => {
   return (
     <div className="container">
       <ImageUploader />
