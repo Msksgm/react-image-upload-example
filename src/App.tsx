@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 
 type ThumbProps = {
@@ -57,9 +57,9 @@ const ImageUploader: FC = () => {
         file: yup.mixed().required(),
       })}
     >
-      {({ handleSubmit, setFieldValue, values }) => {
+      {({ setFieldValue, values }) => {
         return (
-          <form onSubmit={handleSubmit}>
+          <Form>
             <div className="form-group">
               <label htmlFor="file">File upload</label>
               <input
@@ -81,7 +81,7 @@ const ImageUploader: FC = () => {
             <button type="submit" className="btn btn-primary">
               submit
             </button>
-          </form>
+          </Form>
         );
       }}
     </Formik>
