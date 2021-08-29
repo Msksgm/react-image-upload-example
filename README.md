@@ -4,7 +4,7 @@
 
 `Formik`と関数コンポーネントを用いて、画像をブラウザにアップロードするアプリのサンプルコードです。
 
-詳しくは解説記事（https://msksgm.hatenablog.com/entry/2021/08/30/070051）を参照。
+詳しくは解説記事（ https://msksgm.hatenablog.com/entry/2021/08/30/070051 ） を参照。
 
 ## 動作確認
 
