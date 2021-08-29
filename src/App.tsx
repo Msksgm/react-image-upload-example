@@ -22,7 +22,7 @@ const Thumb: FC<ThumbProps> = ({ file }) => {
   }, [file]);
 
   if (!file) {
-    return null;
+    return <></>;
   }
 
   if (loading) {
